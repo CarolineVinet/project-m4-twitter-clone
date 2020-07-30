@@ -1,0 +1,73 @@
+import React from "react";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
+import Logo from "./Logo";
+import GlobalStyles from "./GlobalStyles";
+import { FiBookmark, FiHome, FiBell, FiUser } from "react-icons/fi";
+import { COLORS } from "./constants";
+
+const SideBar = () => {
+  return (
+    <SideBarDivStyle>
+      <GlobalStyles />
+      <LogoDiv>
+        <Logo />
+      </LogoDiv>
+      <LinkStyles>
+        <IconDiv>
+          <FiHome />
+        </IconDiv>
+        <StyledLink to="/">Home</StyledLink>
+      </LinkStyles>
+      <LinkStyles>
+        <IconDiv>
+          <FiUser />
+        </IconDiv>
+        <StyledLink to="/profile/abc">Profile</StyledLink>
+      </LinkStyles>
+      <LinkStyles>
+        <IconDiv>
+          <FiBell />
+        </IconDiv>
+        <StyledLink to="/notifications">Notifications</StyledLink>
+      </LinkStyles>
+      <LinkStyles>
+        <IconDiv>
+          <FiBookmark />
+        </IconDiv>
+        <StyledLink to="/bookmarks">Bookmarks</StyledLink>
+      </LinkStyles>
+    </SideBarDivStyle>
+  );
+};
+
+const StyledLink = styled(NavLink)`
+  text-decoration: none;
+  &.active {
+    color: ${COLORS.primary};
+  }
+`;
+
+const LogoDiv = styled.div``;
+
+const IconDiv = styled.div`
+  padding: 10px;
+`;
+
+const SideBarDivStyle = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 60px;
+  align-items: left;
+  justify-content: left;
+`;
+
+const LinkStyles = styled.div`
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  flex-direction: row;
+  line-height: 2;
+`;
+
+export default SideBar;
