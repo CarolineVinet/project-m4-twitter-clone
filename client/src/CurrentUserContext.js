@@ -55,6 +55,46 @@ const CurrentUserProvider = ({ children }) => {
       });
   };
 
+  const postNewTweet = (text) => {
+    fetch(`/api/tweet`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        status: text,
+      }),
+    })
+      .then((postResponse) => {
+        return postResponse.json();
+      })
+      .then((postData) => {
+        // console.log(postData);
+        // setRelevantHomeFeed({
+        //   tweetIds: relevantHomeFeed.tweetIds.concat([postData.tweet.id]),
+        //   tweetsById: {
+        //     ...relevantHomeFeed.tweetsById,
+        //     [postData.id]: postData.tweet,
+        //   },
+        // });
+        // setStatus("loaded");
+
+        fetch(`/api/me/home-feed`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((feedResponse) => {
+            return feedResponse.json();
+          })
+          .then((feedData) => {
+            setRelevantHomeFeed(feedData);
+            setStatus("loaded");
+          });
+      });
+  };
+
   return (
     <CurrentUserContext.Provider
       value={{
@@ -66,6 +106,7 @@ const CurrentUserProvider = ({ children }) => {
         setSelectedTweetId,
         selectedProfile,
         setSelectedProfile,
+        postNewTweet,
       }}
     >
       {children}
