@@ -8,6 +8,7 @@ import Profile from "./Profile";
 import Bookmarks from "./Bookmarks";
 import Notifications from "./Notifications";
 import SideBar from "./SideBar";
+import CurrentUserContext from "./CurrentUserContext";
 
 const App = () => {
   return (
@@ -28,8 +29,8 @@ const App = () => {
           <Route exact path="/tweet/:tweetId">
             <TweetDetails></TweetDetails>
           </Route>
-          <Route exact path="/:profileId">
-            <Profile></Profile>
+          <Route exact path="/profile/:id">
+            <Profile />
           </Route>
         </Switch>
       </Wrapper>

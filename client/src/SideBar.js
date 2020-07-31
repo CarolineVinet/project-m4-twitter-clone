@@ -1,43 +1,54 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "./Logo";
 import GlobalStyles from "./GlobalStyles";
 import { FiBookmark, FiHome, FiBell, FiUser } from "react-icons/fi";
 import { COLORS } from "./constants";
+import { CurrentUserContext } from "./CurrentUserContext";
 
 const SideBar = () => {
+  const { currentUser, status } = useContext(CurrentUserContext);
+  console.log(currentUser, status);
   return (
-    <SideBarDivStyle>
-      <GlobalStyles />
-      <LogoDiv>
-        <Logo />
-      </LogoDiv>
-      <LinkStyles>
-        <IconDiv>
-          <FiHome />
-        </IconDiv>
-        <StyledLink to="/">Home</StyledLink>
-      </LinkStyles>
-      <LinkStyles>
-        <IconDiv>
-          <FiUser />
-        </IconDiv>
-        <StyledLink to="/profile/abc">Profile</StyledLink>
-      </LinkStyles>
-      <LinkStyles>
-        <IconDiv>
-          <FiBell />
-        </IconDiv>
-        <StyledLink to="/notifications">Notifications</StyledLink>
-      </LinkStyles>
-      <LinkStyles>
-        <IconDiv>
-          <FiBookmark />
-        </IconDiv>
-        <StyledLink to="/bookmarks">Bookmarks</StyledLink>
-      </LinkStyles>
-    </SideBarDivStyle>
+    <>
+      {status === "loaded" ? (
+        <SideBarDivStyle>
+          <GlobalStyles />
+          <LogoDiv>
+            <Logo />
+          </LogoDiv>
+          <LinkStyles>
+            <IconDiv>
+              <FiHome />
+            </IconDiv>
+            <StyledLink to="/">Home</StyledLink>
+          </LinkStyles>
+          <LinkStyles>
+            <IconDiv>
+              <FiUser />
+            </IconDiv>
+            <StyledLink to={`/profile/${currentUser.profile.handle}`}>
+              Profile
+            </StyledLink>
+          </LinkStyles>
+          <LinkStyles>
+            <IconDiv>
+              <FiBell />
+            </IconDiv>
+            <StyledLink to="/notifications">Notifications</StyledLink>
+          </LinkStyles>
+          <LinkStyles>
+            <IconDiv>
+              <FiBookmark />
+            </IconDiv>
+            <StyledLink to="/bookmarks">Bookmarks</StyledLink>
+          </LinkStyles>
+        </SideBarDivStyle>
+      ) : (
+        <p>{status}</p>
+      )}
+    </>
   );
 };
 
