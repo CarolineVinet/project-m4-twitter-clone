@@ -11,10 +11,14 @@ const HomeFeed = () => {
   if (!tweetIds) {
     return null;
   }
+
+  console.log(tweetIds);
   return (
     <div>
       {tweetIds.map((id) => {
-        return <TweetDetails tweetData={tweetsById[id]}></TweetDetails>;
+        return (
+          <TweetDetails key={id} tweetData={tweetsById[id]}></TweetDetails>
+        );
       })}
     </div>
   );

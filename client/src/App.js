@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyles from "./GlobalStyles";
 import styled from "styled-components";
@@ -8,9 +8,11 @@ import Profile from "./Profile";
 import Bookmarks from "./Bookmarks";
 import Notifications from "./Notifications";
 import SideBar from "./SideBar";
-import CurrentUserContext from "./CurrentUserContext";
+import SingleTweet from "./SingleTweet";
+import { CurrentUserContext } from "./CurrentUserContext";
 
 const App = () => {
+  const { selectedProfile, currentUser } = useContext(CurrentUserContext);
   return (
     <Router>
       <GlobalStyles />
@@ -27,7 +29,7 @@ const App = () => {
             <Bookmarks></Bookmarks>
           </Route>
           <Route exact path="/tweet/:tweetId">
-            <TweetDetails></TweetDetails>
+            <SingleTweet></SingleTweet>
           </Route>
           <Route exact path="/profile/:id">
             <Profile />
