@@ -4,6 +4,7 @@ export const CurrentUserContext = React.createContext(null);
 const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = React.useState(null);
   const [status, setStatus] = React.useState("loading");
+  const [sidebarStatus, setSidebarStatus] = React.useState("loading");
   const [relevantHomeFeed, setRelevantHomeFeed] = React.useState({});
   const [selectedTweetId, setSelectedTweetId] = React.useState("");
   const [selectedProfile, setSelectedProfile] = React.useState({});
@@ -20,20 +21,26 @@ const CurrentUserProvider = ({ children }) => {
       })
       .then((data) => {
         setCurrentUser(data);
+        setSidebarStatus("loaded");
+      });
+  });
 
-        fetch(`/api/me/home-feed`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((feedResponse) => {
-            return feedResponse.json();
-          })
-          .then((feedData) => {
-            setRelevantHomeFeed(feedData);
-            setStatus("loaded");
-          });
+  React.useEffect(() => {
+    fetch(`/api/me/home-feed`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((feedResponse) => {
+        return feedResponse.json();
+      })
+      .then((feedData) => {
+        setRelevantHomeFeed(feedData);
+        setStatus("loaded");
+      })
+      .catch((error) => {
+        setStatus("error");
       });
   }, []);
 
@@ -52,6 +59,9 @@ const CurrentUserProvider = ({ children }) => {
       .then((profileData) => {
         setSelectedProfile(profileData);
         setStatus("loaded");
+      })
+      .catch((error) => {
+        setStatus("error");
       });
   };
 
@@ -91,6 +101,9 @@ const CurrentUserProvider = ({ children }) => {
           .then((feedData) => {
             setRelevantHomeFeed(feedData);
             setStatus("loaded");
+          })
+          .catch((error) => {
+            setStatus("error");
           });
       });
   };
@@ -107,6 +120,7 @@ const CurrentUserProvider = ({ children }) => {
         selectedProfile,
         setSelectedProfile,
         postNewTweet,
+        sidebarStatus,
       }}
     >
       {children}

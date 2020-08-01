@@ -3,19 +3,34 @@ import { CurrentUserContext } from "./CurrentUserContext";
 import styled from "styled-components";
 import TweetDetails from "./TweetDetails";
 import { COLORS } from "./constants";
+import ErrorPage from "./ErrorPage";
+import Spinner from "./Spinner";
 
 const HomeFeed = () => {
   const [textInput, setTextInput] = React.useState("");
   const {
     relevantHomeFeed: { tweetIds, tweetsById },
     postNewTweet,
+    status,
+    sidebarStatus,
   } = useContext(CurrentUserContext);
+
+  if (sidebarStatus !== "loaded") {
+    return <Spinner />;
+  }
+
+  if (status === "error") {
+    return <ErrorPage />;
+  }
+
+  if (status === "loading") {
+    return <Spinner />;
+  }
 
   if (!tweetIds) {
     return null;
   }
 
-  console.log(tweetIds);
   return (
     <MainFeedBodyDiv>
       <InputDiv>

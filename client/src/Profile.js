@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { CurrentUserContext } from "./CurrentUserContext";
 import TweetDetails from "./TweetDetails";
+import ErrorPage from "./ErrorPage";
 
 const Profile = () => {
   const {
@@ -12,6 +13,10 @@ const Profile = () => {
     relevantHomeFeed: { tweetsById, tweetIds },
   } = useContext(CurrentUserContext);
   const { id } = useParams();
+
+  if (status === "error") {
+    return <ErrorPage />;
+  }
 
   if (status === "loading") {
     return <div>Fetching Profile</div>;

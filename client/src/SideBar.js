@@ -8,11 +8,10 @@ import { COLORS } from "./constants";
 import { CurrentUserContext } from "./CurrentUserContext";
 
 const SideBar = () => {
-  const { currentUser, status } = useContext(CurrentUserContext);
-  console.log(currentUser, status);
+  const { currentUser, sidebarStatus } = useContext(CurrentUserContext);
   return (
     <>
-      {status === "loaded" ? (
+      {sidebarStatus === "loaded" ? (
         <SideBarDivStyle>
           <GlobalStyles />
           <LogoDiv>
@@ -45,9 +44,7 @@ const SideBar = () => {
             <StyledLink to="/bookmarks">Bookmarks</StyledLink>
           </LinkStyles>
         </SideBarDivStyle>
-      ) : (
-        <p>{status}</p>
-      )}
+      ) : null}
     </>
   );
 };
