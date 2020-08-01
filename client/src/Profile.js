@@ -1,11 +1,16 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { CurrentUserContext } from "./CurrentUserContext";
+import TweetDetails from "./TweetDetails";
 
 const Profile = () => {
-  const { selectedProfile, currentUser, status, getUserProfile } = useContext(
-    CurrentUserContext
-  );
+  const {
+    selectedProfile,
+    currentUser,
+    status,
+    getUserProfile,
+    relevantHomeFeed: { tweetsById, tweetIds },
+  } = useContext(CurrentUserContext);
   const { id } = useParams();
 
   if (status === "loading") {
@@ -49,6 +54,19 @@ const Profile = () => {
         {location}
       </div>
       <img src={avatarSrc}></img>
+      <div>
+        <p>Tweets</p>
+        {tweetIds.map((tweetId) => {
+          if (tweetsById[tweetId].author.handle === id) {
+            return (
+              <TweetDetails
+                key={tweetId}
+                tweetData={tweetsById[tweetId]}
+              ></TweetDetails>
+            );
+          }
+        })}
+      </div>
     </div>
   );
 };
