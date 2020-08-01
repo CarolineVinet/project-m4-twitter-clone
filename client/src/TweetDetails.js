@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from "./CurrentUserContext";
+import ActionBar from "./ActionBar";
 
 const TweetDetails = ({ tweetData }) => {
   const { getUserProfile, setSelectedTweetId } = useContext(CurrentUserContext);
@@ -32,6 +33,13 @@ const TweetDetails = ({ tweetData }) => {
           ) : null}
         </TweetBody>
       </StyledLink>
+      <ActionBar
+        isLiked={tweetData.isLiked}
+        isRetweeted={tweetData.isRetweeted}
+        numLikes={tweetData.numLikes}
+        numRetweets={tweetData.numRetweets}
+        tweetId={tweetData.id}
+      />
     </TweetDiv>
   );
 };

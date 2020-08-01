@@ -79,16 +79,6 @@ const CurrentUserProvider = ({ children }) => {
         return postResponse.json();
       })
       .then((postData) => {
-        // console.log(postData);
-        // setRelevantHomeFeed({
-        //   tweetIds: relevantHomeFeed.tweetIds.concat([postData.tweet.id]),
-        //   tweetsById: {
-        //     ...relevantHomeFeed.tweetsById,
-        //     [postData.id]: postData.tweet,
-        //   },
-        // });
-        // setStatus("loaded");
-
         fetch(`/api/me/home-feed`, {
           method: "GET",
           headers: {
@@ -108,6 +98,80 @@ const CurrentUserProvider = ({ children }) => {
       });
   };
 
+  const toggleLike = (tweetId, isLiked) => {
+    fetch(`/api/tweet/${tweetId}/like`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        like: !isLiked,
+      }),
+    })
+      .then((likedResponse) => {
+        return likedResponse.json();
+      })
+      .then(() => {
+        const matchingLikedTweet = relevantHomeFeed.tweetsById[tweetId];
+
+        matchingLikedTweet.isLiked = !isLiked;
+
+        let newNumLikes;
+        if (isLiked) {
+          newNumLikes = matchingLikedTweet.numLikes - 1;
+        } else if (!isLiked) {
+          newNumLikes = matchingLikedTweet.numLikes + 1;
+        }
+
+        matchingLikedTweet.numLikes = newNumLikes;
+
+        setRelevantHomeFeed({
+          tweetsById: {
+            ...relevantHomeFeed.tweetsById,
+            [tweetId]: matchingLikedTweet,
+          },
+          tweetIds: relevantHomeFeed.tweetIds,
+        });
+      });
+  };
+
+  const toggleRetweet = (tweetId, isRetweeted) => {
+    fetch(`/api/tweet/${tweetId}/retweet`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        retweet: !isRetweeted,
+      }),
+    })
+      .then((retweetResponse) => {
+        return retweetResponse.json();
+      })
+      .then(() => {
+        const matchingRetweetedTweet = relevantHomeFeed.tweetsById[tweetId];
+
+        matchingRetweetedTweet.isRetweeted = !isRetweeted;
+
+        let newNumRetweets;
+        if (isRetweeted) {
+          newNumRetweets = matchingRetweetedTweet.numRetweets - 1;
+        } else if (!isRetweeted) {
+          newNumRetweets = matchingRetweetedTweet.numRetweets + 1;
+        }
+
+        matchingRetweetedTweet.numRetweets = newNumRetweets;
+
+        setRelevantHomeFeed({
+          tweetsById: {
+            ...relevantHomeFeed.tweetsById,
+            [tweetId]: matchingRetweetedTweet,
+          },
+          tweetIds: relevantHomeFeed.tweetIds,
+        });
+      });
+  };
+
   return (
     <CurrentUserContext.Provider
       value={{
@@ -121,6 +185,8 @@ const CurrentUserProvider = ({ children }) => {
         setSelectedProfile,
         postNewTweet,
         sidebarStatus,
+        toggleLike,
+        toggleRetweet,
       }}
     >
       {children}

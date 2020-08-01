@@ -3,6 +3,7 @@ import styled from "styled-components";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from "./CurrentUserContext";
+import ActionBar from "./ActionBar";
 
 const SingleTweet = () => {
   const {
@@ -20,7 +21,6 @@ const SingleTweet = () => {
         {renderedTweet.author.handle}
         {renderedTweet.author.displayName}
       </Header>
-
       <TweetBody>
         {renderedTweet.status}
         {renderedTweet.media.length > 0 ? (
@@ -31,6 +31,7 @@ const SingleTweet = () => {
           {renderedTweet.author.location}
         </TimeAndPlace>
       </TweetBody>
+      <ActionBar />
     </TweetDiv>
   );
 };
