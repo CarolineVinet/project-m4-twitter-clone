@@ -44,6 +44,7 @@ const HomeFeed = () => {
     <MainFeedBodyDiv>
       <InputDiv>
         <NewTweetInput
+          aria-label="input area for new tweet"
           placeholder="What's on your mind ?"
           onChange={(event) => setTextInput(event.target.value)}
         ></NewTweetInput>

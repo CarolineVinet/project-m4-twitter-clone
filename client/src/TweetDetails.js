@@ -8,7 +8,7 @@ const TweetDetails = ({ tweetData }) => {
   const { getUserProfile, setSelectedTweetId } = useContext(CurrentUserContext);
   return (
     <TweetDiv>
-      <Header>
+      <Header aria-label="Tweet header. Link to tweet author's profile page">
         <StyledLink
           onClick={() => getUserProfile(tweetData.author.handle)}
           to={`/profile/${tweetData.author.handle}`}
@@ -16,8 +16,13 @@ const TweetDetails = ({ tweetData }) => {
           <Avatar src={tweetData.author.avatarSrc}></Avatar>
 
           <TweetAuthor>
-            <AuthorName>{tweetData.author.displayName}</AuthorName>
-            <AuthorHandle> @{tweetData.author.handle}</AuthorHandle>
+            <AuthorName aria-label="Tweet author's name">
+              {tweetData.author.displayName}
+            </AuthorName>
+            <AuthorHandle aria-label="Tweet author's handle">
+              {" "}
+              @{tweetData.author.handle}
+            </AuthorHandle>
           </TweetAuthor>
         </StyledLink>
       </Header>
@@ -26,8 +31,11 @@ const TweetDetails = ({ tweetData }) => {
         onClick={() => setSelectedTweetId(tweetData.id)}
         to={`/tweet/${tweetData.id}`}
       >
-        <TweetBody>
-          <TweetStatus> {tweetData.status}</TweetStatus>
+        <TweetBody aria-label="Body of tweet. Link to expanded tweet view.">
+          <TweetStatus aria-label="tweet status">
+            {" "}
+            {tweetData.status}
+          </TweetStatus>
           {tweetData.media.length > 0 ? (
             <TweetMedia src={tweetData.media[0].url}></TweetMedia>
           ) : null}

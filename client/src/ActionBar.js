@@ -31,18 +31,24 @@ const ActionBar = ({
   const { toggleLike, toggleRetweet } = useContext(CurrentUserContext);
   return (
     <ActionBarDiv>
-      <CommentButton>
+      <CommentButton aria-label="comment button">
         <BsChat />
       </CommentButton>
-      <RetweetButton onClick={() => toggleRetweet(tweetId, isRetweeted)}>
+      <RetweetButton
+        aria-label="retweet button"
+        onClick={() => toggleRetweet(tweetId, isRetweeted)}
+      >
         <ToggleRetweetIcon isRetweeted={isRetweeted} />
       </RetweetButton>
-      <NumRetweets>{numRetweets}</NumRetweets>
-      <LikeButton onClick={() => toggleLike(tweetId, isLiked)}>
+      <NumRetweets aria-label="Number of retweets">{numRetweets}</NumRetweets>
+      <LikeButton
+        aria-label="Like button"
+        onClick={() => toggleLike(tweetId, isLiked)}
+      >
         <ToggledHeart isLiked={isLiked} />
       </LikeButton>
-      <NumLikes>{numLikes}</NumLikes>
-      <UploadButton>
+      <NumLikes aria-label="number of likes">{numLikes}</NumLikes>
+      <UploadButton aria-label="upload button">
         <FiUpload />
       </UploadButton>
     </ActionBarDiv>

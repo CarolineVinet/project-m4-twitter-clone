@@ -21,13 +21,18 @@ const SideBar = () => {
             <IconDiv>
               <FiHome />
             </IconDiv>
-            <StyledLink to="/">Home</StyledLink>
+            <StyledLink to="/" aria-label="Go to homepage">
+              Home
+            </StyledLink>
           </LinkStyles>
           <LinkStyles>
             <IconDiv>
               <FiUser />
             </IconDiv>
-            <StyledLink to={`/profile/${currentUser.profile.handle}`}>
+            <StyledLink
+              to={`/profile/${currentUser.profile.handle}`}
+              aria-label="Go to my profile"
+            >
               Profile
             </StyledLink>
           </LinkStyles>
@@ -35,13 +40,20 @@ const SideBar = () => {
             <IconDiv>
               <FiBell />
             </IconDiv>
-            <StyledLink to="/notifications">Notifications</StyledLink>
+            <StyledLink
+              to="/notifications"
+              aria-label="Go to notifications page"
+            >
+              Notifications
+            </StyledLink>
           </LinkStyles>
           <LinkStyles>
             <IconDiv>
               <FiBookmark />
             </IconDiv>
-            <StyledLink to="/bookmarks">Bookmarks</StyledLink>
+            <StyledLink to="/bookmarks" aria-label="Go to my bookmarks">
+              Bookmarks
+            </StyledLink>
           </LinkStyles>
         </SideBarDivStyle>
       ) : null}
