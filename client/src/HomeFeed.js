@@ -5,6 +5,7 @@ import TweetDetails from "./TweetDetails";
 import { COLORS } from "./constants";
 import ErrorPage from "./ErrorPage";
 import Spinner from "./Spinner";
+import InputCalculator from "./InputCalculator";
 
 const HomeFeed = () => {
   const [textInput, setTextInput] = React.useState("");
@@ -31,15 +32,23 @@ const HomeFeed = () => {
     return null;
   }
 
+  const textSubmitClick = () => {
+    if (textInput.length > 280) {
+      return null;
+    } else {
+      postNewTweet(textInput);
+    }
+  };
+
   return (
     <MainFeedBodyDiv>
       <InputDiv>
-        <NewTweet
-          onChange={(event) => setTextInput(event.target.value)}
+        <NewTweetInput
           placeholder="What's on your mind ?"
-          maxlength="20"
-        ></NewTweet>
-        <MeowButton onClick={() => postNewTweet(textInput)}>Meow</MeowButton>
+          onChange={(event) => setTextInput(event.target.value)}
+        ></NewTweetInput>
+        <InputCalculator textInput={textInput} />
+        <MeowButton onClick={textSubmitClick}>Meow</MeowButton>
       </InputDiv>
       {tweetIds.map((id) => {
         return (
@@ -62,12 +71,6 @@ const MainFeedBodyDiv = styled.div`
   flex-direction: column;
   margin-left: 30px;
   align-items: center;
-`;
-
-const NewTweet = styled.textarea`
-  width: 50%;
-  border: 2px blue solid;
-  margin-bottom: 15px;
 `;
 
 const InputDiv = styled.div`
@@ -96,4 +99,10 @@ const MeowButton = styled.button`
   &:active {
     transform: translateY(4px);
   }
+`;
+
+const NewTweetInput = styled.textarea`
+  width: 50%;
+  border: 2px blue solid;
+  margin-bottom: 15px;
 `;
