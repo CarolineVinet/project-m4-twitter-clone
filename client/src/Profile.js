@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { CurrentUserContext } from "./CurrentUserContext";
 import TweetDetails from "./TweetDetails";
 import ErrorPage from "./ErrorPage";
+import styled from "styled-components";
 
 const Profile = () => {
   const {
@@ -60,7 +61,12 @@ const Profile = () => {
       </div>
       <img src={avatarSrc}></img>
       <div>
-        <p>Tweets</p>
+        <Tabs>
+          <div>Tweets</div>
+          <div>Media</div>
+          <div>Likes</div>
+        </Tabs>
+
         {tweetIds.map((tweetId) => {
           if (
             tweetsById[tweetId].author.handle === id ||
@@ -81,3 +87,5 @@ const Profile = () => {
 };
 
 export default Profile;
+
+const Tabs = styled.div``;

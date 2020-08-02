@@ -3,9 +3,11 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { CurrentUserContext } from "./CurrentUserContext";
 import ActionBar from "./ActionBar";
+import moment from "moment";
 
 const TweetDetails = ({ tweetData }) => {
-  console.log(tweetData);
+  const date = tweetData.timestamp;
+  const formattedDate = moment(date).format("MMM Do");
   const { getUserProfile, setSelectedTweetId } = useContext(CurrentUserContext);
   return (
     <TweetDiv>
@@ -27,6 +29,7 @@ const TweetDetails = ({ tweetData }) => {
               {" "}
               @{tweetData.author.handle}
             </AuthorHandle>
+            <Time>{formattedDate}</Time>
           </TweetAuthor>
         </StyledLink>
       </Header>
@@ -89,6 +92,8 @@ const AuthorHandle = styled.p`
 const AuthorName = styled.p`
   font-weight: bold;
 `;
+
+const Time = styled.p``;
 
 const Avatar = styled.img`
   height: 50px;
