@@ -62,7 +62,11 @@ const Profile = () => {
       <div>
         <p>Tweets</p>
         {tweetIds.map((tweetId) => {
-          if (tweetsById[tweetId].author.handle === id) {
+          if (
+            tweetsById[tweetId].author.handle === id ||
+            (tweetsById[tweetId].retweetFrom &&
+              tweetsById[tweetId].retweetFrom.handle === id)
+          ) {
             return (
               <TweetDetails
                 key={tweetId}
