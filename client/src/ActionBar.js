@@ -34,20 +34,26 @@ const ActionBar = ({
       <CommentButton aria-label="comment button">
         <BsChat />
       </CommentButton>
-      <RetweetButton
-        aria-label="retweet button"
-        onClick={() => toggleRetweet(tweetId, isRetweeted)}
-      >
-        <ToggleRetweetIcon isRetweeted={isRetweeted} />
-      </RetweetButton>
-      <NumRetweets aria-label="Number of retweets">{numRetweets}</NumRetweets>
-      <LikeButton
-        aria-label="Like button"
-        onClick={() => toggleLike(tweetId, isLiked)}
-      >
-        <ToggledHeart isLiked={isLiked} />
-      </LikeButton>
-      <NumLikes aria-label="number of likes">{numLikes}</NumLikes>
+      <RetweetButtonDiv>
+        <RetweetButton
+          aria-label="retweet button"
+          onClick={() => toggleRetweet(tweetId, isRetweeted)}
+        >
+          <ToggleRetweetIcon isRetweeted={isRetweeted} />
+        </RetweetButton>
+        <NumRetweets aria-label="Number of retweets">{numRetweets}</NumRetweets>
+      </RetweetButtonDiv>
+
+      <LikeButtonDiv>
+        <LikeButton
+          aria-label="Like button"
+          onClick={() => toggleLike(tweetId, isLiked)}
+        >
+          <ToggledHeart isLiked={isLiked} />
+        </LikeButton>
+        <NumLikes aria-label="number of likes">{numLikes}</NumLikes>
+      </LikeButtonDiv>
+
       <UploadButton aria-label="upload button">
         <FiUpload />
       </UploadButton>
@@ -58,33 +64,96 @@ const ActionBar = ({
 const ActionBarDiv = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
-  padding-left: 1%;
-  padding-right: 1%;
+  width: 90%;
+  justify-content: space-evenly;
+  margin-left: 50px;
+  margin-right: 50px;
 `;
 
 const CommentButton = styled.button`
-  width: 25%;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+  &:hover {
+    background-color: #d1c1f6;
+    border-radius: 50%;
+  }
+`;
+
+const RetweetButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const RetweetButton = styled.button`
-  width: 12%;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+  &:hover {
+    background-color: #d1c1f6;
+    border-radius: 50%;
+  }
 `;
 
 const NumRetweets = styled.div`
-  width: 12%;
+  font-size: 12px;
+  align-items: center;
+`;
+
+const LikeButtonDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 const LikeButton = styled.button`
-  width: 12%;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+  &:hover {
+    background-color: #d1c1f6;
+    border-radius: 50%;
+  }
 `;
 
 const NumLikes = styled.div`
-  width: 12%;
+  font-size: 12px;
+  align-items: center;
 `;
 
 const UploadButton = styled.button`
-  width: 25%;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+  &:hover {
+    background-color: #d1c1f6;
+    border-radius: 50%;
+  }
 `;
 
 export default ActionBar;

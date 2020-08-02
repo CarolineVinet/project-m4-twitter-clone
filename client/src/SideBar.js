@@ -63,23 +63,27 @@ const SideBar = () => {
 
 const StyledLink = styled(NavLink)`
   text-decoration: none;
+  width: 80%;
   &.active {
     color: ${COLORS.primary};
   }
-`;
-
-const LogoDiv = styled.div``;
-
-const IconDiv = styled.div`
-  padding: 10px;
 `;
 
 const SideBarDivStyle = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 60px;
+  margin-right: 60px;
   align-items: left;
   justify-content: left;
+`;
+
+const LogoDiv = styled.div`
+  padding-top: 15px;
+`;
+
+const IconDiv = styled.div`
+  width: 20%;
 `;
 
 const LinkStyles = styled.div`
@@ -88,6 +92,15 @@ const LinkStyles = styled.div`
   display: flex;
   flex-direction: row;
   line-height: 2;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+
+  &:hover {
+    background-color: #d1c1f6;
+    border-radius: 30px;
+  }
 `;
 
 export default SideBar;

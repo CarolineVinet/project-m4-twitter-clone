@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { CurrentUserContext } from "./CurrentUserContext";
 import ActionBar from "./ActionBar";
 import moment from "moment";
+import { AiOutlineRetweet } from "react-icons/ai";
 
 const TweetDetails = ({ tweetData }) => {
   const date = tweetData.timestamp;
@@ -12,7 +13,10 @@ const TweetDetails = ({ tweetData }) => {
   return (
     <TweetDiv>
       {tweetData.retweetFrom && (
-        <RetweetedBy>Retweeted by {tweetData.retweetFrom.handle}</RetweetedBy>
+        <RetweetedBy>
+          <AiOutlineRetweet />
+          {"   "} Retweeted by {tweetData.retweetFrom.handle}
+        </RetweetedBy>
       )}
       <Header aria-label="Tweet header. Link to tweet author's profile page">
         <StyledLink
@@ -29,7 +33,7 @@ const TweetDetails = ({ tweetData }) => {
               {" "}
               @{tweetData.author.handle}
             </AuthorHandle>
-            <Time>{formattedDate}</Time>
+            <Time> - {formattedDate}</Time>
           </TweetAuthor>
         </StyledLink>
       </Header>
@@ -60,40 +64,57 @@ const TweetDetails = ({ tweetData }) => {
 };
 
 const TweetDiv = styled.div`
-  margin: auto;
-  border: 1px;
-  border-color: grey;
-  border-style: solid;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  padding: 10px;
+  border: 1px grey solid;
+  padding: 15px;
   width: 90%;
+  margin-bottom: 15px;
+  box-shadow: 2px 2px 5px #a9a8ae;
+  border-radius: 5px;
 `;
 
-const TweetBody = styled.div``;
+const TweetBody = styled.div`
+  margin-left: 50px;
+  margin-bottom: 15px;
+`;
 
-const RetweetedBy = styled.p``;
+const RetweetedBy = styled.div`
+  font-style: italic;
+  font-size: 12px;
+  align-items: center;
+  margin-left: 10px;
+  margin-bottom: 10px;
+`;
 
 const Header = styled.div`
-  width: 40%;
-  margin-bottom: 5px;
+  width: 100%;
+  margin-bottom: -15px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
 `;
 
 const TweetAuthor = styled.div`
   max-width: 90%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-left: 10px;
+  align-items: top;
 `;
 const AuthorHandle = styled.p`
   font-size: 12px;
+  margin-left: 1px;
+  margin-right: 5px;
+  margin-top: 3px;
 `;
 
 const AuthorName = styled.p`
   font-weight: bold;
 `;
 
-const Time = styled.p``;
+const Time = styled.p`
+  font-size: 13px;
+  margin-top: 3px;
+`;
 
 const Avatar = styled.img`
   height: 50px;

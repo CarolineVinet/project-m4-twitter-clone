@@ -16,15 +16,18 @@ const InputCalculator = ({ textInput }) => {
 
 const MaxCharacters = styled.div`
   color: grey;
+  padding-top: 10px;
 `;
 
 const EightyPercentCap = styled.div`
   color: #ffeb3b;
   font-weight: bold;
+  padding-top: 10px;
 `;
 
 const LimitReached = styled.div`
   color: red;
+  padding-top: 10px;
 `;
 
 export default InputCalculator;
