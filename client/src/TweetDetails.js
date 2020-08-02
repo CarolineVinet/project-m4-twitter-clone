@@ -5,9 +5,13 @@ import { CurrentUserContext } from "./CurrentUserContext";
 import ActionBar from "./ActionBar";
 
 const TweetDetails = ({ tweetData }) => {
+  console.log(tweetData);
   const { getUserProfile, setSelectedTweetId } = useContext(CurrentUserContext);
   return (
     <TweetDiv>
+      {tweetData.retweetFrom && (
+        <RetweetedBy>Retweeted by {tweetData.retweetFrom.handle}</RetweetedBy>
+      )}
       <Header aria-label="Tweet header. Link to tweet author's profile page">
         <StyledLink
           onClick={() => getUserProfile(tweetData.author.handle)}
@@ -65,6 +69,8 @@ const TweetDiv = styled.div`
 
 const TweetBody = styled.div``;
 
+const RetweetedBy = styled.p``;
+
 const Header = styled.div`
   width: 40%;
   margin-bottom: 5px;
@@ -108,8 +114,7 @@ const TweetMedia = styled.img`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  display:flex;
-  }
+  display: flex;
 `;
 
 export default TweetDetails;

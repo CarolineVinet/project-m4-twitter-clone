@@ -14,6 +14,7 @@ const HomeFeed = () => {
     postNewTweet,
     status,
     sidebarStatus,
+    statusOfTweetPost,
   } = useContext(CurrentUserContext);
 
   if (sidebarStatus !== "loaded") {
@@ -48,6 +49,9 @@ const HomeFeed = () => {
           placeholder="What's on your mind ?"
           onChange={(event) => setTextInput(event.target.value)}
         ></NewTweetInput>
+        {statusOfTweetPost === "error" && (
+          <PostError>Something went wrong! Please try Meowing again.</PostError>
+        )}
         <InputCalculator textInput={textInput} />
         <MeowButton onClick={textSubmitClick}>Meow</MeowButton>
       </InputDiv>
@@ -106,4 +110,8 @@ const NewTweetInput = styled.textarea`
   width: 50%;
   border: 2px blue solid;
   margin-bottom: 15px;
+`;
+
+const PostError = styled.p`
+  color: red;
 `;

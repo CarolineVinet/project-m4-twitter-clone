@@ -8,6 +8,7 @@ const CurrentUserProvider = ({ children }) => {
   const [relevantHomeFeed, setRelevantHomeFeed] = React.useState({});
   const [selectedTweetId, setSelectedTweetId] = React.useState("");
   const [selectedProfile, setSelectedProfile] = React.useState({});
+  const [statusOfTweetPost, setStatusOfTweetPost] = React.useState("ok");
 
   React.useEffect(() => {
     fetch(`/api/me/profile`, {
@@ -23,7 +24,7 @@ const CurrentUserProvider = ({ children }) => {
         setCurrentUser(data);
         setSidebarStatus("loaded");
       });
-  });
+  }, []);
 
   React.useEffect(() => {
     fetch(`/api/me/home-feed`, {
@@ -66,6 +67,7 @@ const CurrentUserProvider = ({ children }) => {
   };
 
   const postNewTweet = (text) => {
+    setStatusOfTweetPost("ok");
     fetch(`/api/tweet`, {
       method: "POST",
       headers: {
@@ -95,6 +97,9 @@ const CurrentUserProvider = ({ children }) => {
           .catch((error) => {
             setStatus("error");
           });
+      })
+      .catch((error) => {
+        setStatusOfTweetPost("error");
       });
   };
 
@@ -187,6 +192,7 @@ const CurrentUserProvider = ({ children }) => {
         sidebarStatus,
         toggleLike,
         toggleRetweet,
+        statusOfTweetPost,
       }}
     >
       {children}
