@@ -18,7 +18,11 @@ const HomeFeed = () => {
   } = useContext(CurrentUserContext);
 
   if (sidebarStatus !== "loaded") {
-    return <Spinner />;
+    return (
+      <FirstSpinnerDiv>
+        <Spinner />
+      </FirstSpinnerDiv>
+    );
   }
 
   if (status === "error") {
@@ -26,7 +30,11 @@ const HomeFeed = () => {
   }
 
   if (status === "loading") {
-    return <Spinner />;
+    return (
+      <SecondSpinnerDiv>
+        <Spinner />
+      </SecondSpinnerDiv>
+    );
   }
 
   if (!tweetIds) {
@@ -79,6 +87,18 @@ const HomeFeed = () => {
 };
 
 export default HomeFeed;
+
+const FirstSpinnerDiv = styled.div`
+  position: absolute;
+  top: 30%;
+  left: 50%;
+`;
+
+const SecondSpinnerDiv = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;
 
 const MainFeedBodyDiv = styled.div`
   display: flex;
