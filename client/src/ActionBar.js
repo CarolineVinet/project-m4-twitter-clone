@@ -30,7 +30,7 @@ const ActionBar = ({
 }) => {
   const { toggleLike, toggleRetweet } = useContext(CurrentUserContext);
   return (
-    <ActionBarDiv>
+    <ActionBarDiv aria-label="action bar">
       <CommentButton aria-label="comment button">
         <BsChat />
       </CommentButton>
@@ -64,10 +64,12 @@ const ActionBar = ({
 const ActionBarDiv = styled.div`
   display: flex;
   flex-direction: row;
-  width: 90%;
+  width: 80%;
   justify-content: space-evenly;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 10%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-top: 1px solid #e2e2e2;
 `;
 
 const CommentButton = styled.button`
@@ -76,6 +78,8 @@ const CommentButton = styled.button`
   background-color: white;
   &:focus {
     outline: none;
+    background-color: #d1c1f6;
+    border-radius: 50%;
   }
   &:active {
     transform: translateY(2px);
@@ -98,6 +102,8 @@ const RetweetButton = styled.button`
   background-color: white;
   &:focus {
     outline: none;
+    background-color: #d1c1f6;
+    border-radius: 50%;
   }
   &:active {
     transform: translateY(2px);
@@ -125,6 +131,8 @@ const LikeButton = styled.button`
   background-color: white;
   &:focus {
     outline: none;
+    background-color: #d1c1f6;
+    border-radius: 50%;
   }
   &:active {
     transform: translateY(2px);
@@ -146,6 +154,8 @@ const UploadButton = styled.button`
   background-color: white;
   &:focus {
     outline: none;
+    background-color: #d1c1f6;
+    border-radius: 50%;
   }
   &:active {
     transform: translateY(2px);

@@ -70,10 +70,11 @@ const StyledLink = styled(NavLink)`
 `;
 
 const SideBarDivStyle = styled.div`
+  width: 20%;
   display: flex;
   flex-direction: column;
-  margin-left: 60px;
-  margin-right: 60px;
+  padding-left: 55px;
+  margin-top: 15px;
   align-items: left;
   justify-content: left;
 `;

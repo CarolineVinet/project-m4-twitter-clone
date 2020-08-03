@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { CurrentUserContext } from "./CurrentUserContext";
 import styled from "styled-components";
 import TweetDetails from "./TweetDetails";
-import { COLORS } from "./constants";
 import ErrorPage from "./ErrorPage";
 import Spinner from "./Spinner";
 import InputCalculator from "./InputCalculator";
@@ -84,23 +83,24 @@ export default HomeFeed;
 const MainFeedBodyDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 20px;
-  align-items: left;
+  align-items: center;
   width: 60%;
 `;
 const CurrentPage = styled.div`
   font-size: 24px;
-  padding: 5px;
+  padding-right: 60%;
+  padding-top: 15px;
   font-weight: bold;
   color: black;
   justify-content: left;
+  margin-bottom: 15px;
 `;
 
 const InputDiv = styled.div`
   border: 1px solid grey;
   border-radius: 8px 8px 0px 0px;
   border-bottom: 9px solid #4c00ffba;
-  width: 90%;
+  width: 60%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,6 +140,7 @@ const MeowButton = styled.button`
   }
   &:focus {
     outline: none;
+    background-color: #d1c1f6;
   }
   &:active {
     transform: translateY(4px);

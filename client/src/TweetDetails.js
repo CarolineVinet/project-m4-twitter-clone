@@ -66,7 +66,7 @@ const TweetDetails = ({ tweetData }) => {
 const TweetDiv = styled.div`
   border: 1px grey solid;
   padding: 15px;
-  width: 90%;
+  width: 60%;
   margin-bottom: 15px;
   box-shadow: 2px 2px 5px #a9a8ae;
   border-radius: 5px;
@@ -132,8 +132,8 @@ const TweetStatus = styled.div`
 `;
 
 const TweetMedia = styled.img`
-  max-width: 10%;
-  max-height: 10%;
+  max-width: 25%;
+  max-height: 25%;
   border-radius: 5px;
   margin-left: 20px;
 `;
