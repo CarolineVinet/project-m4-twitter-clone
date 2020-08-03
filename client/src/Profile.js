@@ -5,6 +5,8 @@ import TweetDetails from "./TweetDetails";
 import ErrorPage from "./ErrorPage";
 import styled from "styled-components";
 import moment from "moment";
+import { GrLocation } from "react-icons/gr";
+import { FiCalendar } from "react-icons/fi";
 
 const Profile = () => {
   const {
@@ -56,40 +58,48 @@ const Profile = () => {
 
   return (
     <MainProfileDiv>
-      <HeaderDiv>
-        <BannerDiv>
-          <UserBanner src={bannerSrc}></UserBanner>
-        </BannerDiv>
-        {/* <ProfilePicDiv> */}
-        <ProfilePic src={avatarSrc}></ProfilePic>
-        {/* </ProfilePicDiv> */}
-        <BioBody>
-          <ButtonDiv>
-            <FollowButton>{isBeingFollowedByYou}Following</FollowButton>
-          </ButtonDiv>
-          <BioDiv>
-            <Name>{displayName}</Name>
-            <HandleFollows>
-              @{handle}
-              {isFollowingYou}
-            </HandleFollows>
-            <Bio>{bio}</Bio>
-            <LocationJoined>
-              {location}
-              {joined}
-            </LocationJoined>
-            <Follows>
-              <NumFollowers>{numFollowers}</NumFollowers> Followers
-              <NumFollowing>{numFollowing}</NumFollowing> Following
-            </Follows>
-          </BioDiv>
-        </BioBody>
-      </HeaderDiv>
-      <Tabs>
-        <Tweets>Tweets</Tweets>
-        <Media>Media</Media>
-        <Likes>Likes</Likes>
-      </Tabs>
+      <BorderWrapper>
+        <HeaderDiv>
+          <BannerDiv>
+            <UserBanner src={bannerSrc}></UserBanner>
+          </BannerDiv>
+          {/* <ProfilePicDiv> */}
+          <ProfilePic src={avatarSrc}></ProfilePic>
+          {/* </ProfilePicDiv> */}
+          <BioBody>
+            <ButtonDiv>
+              <FollowButton>{isBeingFollowedByYou}Following</FollowButton>
+            </ButtonDiv>
+            <BioDiv>
+              <Name>{displayName}</Name>
+              <HandleFollows>
+                @{handle}
+                {isFollowingYou ? <FollowsYou>Following You</FollowsYou> : null}
+              </HandleFollows>
+              <Bio>{bio}</Bio>
+              <LocationJoined>
+                <Location>
+                  <GrLocation />
+                  {"  " + location}
+                </Location>{" "}
+                <DateJoined>
+                  <FiCalendar />
+                  {"  Joined " + moment(joined).format("MMMM YYYY")}
+                </DateJoined>
+              </LocationJoined>
+              <Follows>
+                <NumFollowers>{numFollowers}</NumFollowers> Followers
+                <NumFollowing>{numFollowing}</NumFollowing> Following
+              </Follows>
+            </BioDiv>
+          </BioBody>
+        </HeaderDiv>
+        <Tabs>
+          <Tweets>Tweets</Tweets>
+          <Media>Media</Media>
+          <Likes>Likes</Likes>
+        </Tabs>
+      </BorderWrapper>
       <TweetsTabBody>
         {tweetIds.map((tweetId) => {
           if (
@@ -113,14 +123,28 @@ const Profile = () => {
 export default Profile;
 
 const MainProfileDiv = styled.div`
-  border: grey solid 1px;
-  width: 80%;
+  /* border: grey solid 1px; */
+  width: 60%;
   margin: 15px;
 `;
 
-const HeaderDiv = styled.div`
-  height: 50%50px;
+const BorderWrapper = styled.div`
+  border: grey solid 1px;
+  border-bottom: none;
+  /* width: 60%;
+  margin: 15px; */
 `;
+
+const FollowsYou = styled.span`
+  background-color: lightgray;
+  border-radius: 5px;
+  color: charcoal;
+  font-size: 12px;
+  margin-left: 5px;
+  padding: 0px 3px;
+`;
+
+const HeaderDiv = styled.div``;
 
 const BannerDiv = styled.div`
   height: 40%;
@@ -136,10 +160,10 @@ const ProfilePic = styled.img`
   border: white solid 8px;
   z-index: 9;
   position: absolute;
-  top: 25%;
-  left: 25%;
-  max-width: 250px;
-  max-height: 250px;
+  top: 20%;
+  left: 27%;
+  max-width: 220px;
+  max-height: 220px;
 `;
 
 const BioBody = styled.div`
@@ -148,11 +172,11 @@ const BioBody = styled.div`
 
 const ButtonDiv = styled.div`
   width: 100%;
-  padding-left: 90%;
+  padding-left: 80%;
 `;
 
 const FollowButton = styled.button`
-  background-color: blue;
+  background-color: #4c00ffba;
   color: white;
   padding: 10px;
   font-size: 18px;
@@ -170,6 +194,7 @@ const Name = styled.p`
 `;
 
 const HandleFollows = styled.div`
+  align-items: center;
   display: flex;
   font-size: 14px;
   flex-direction: row;
@@ -178,6 +203,7 @@ const HandleFollows = styled.div`
 const Bio = styled.p`
   margin-top: 15px;
   margin-bottom: 15px;
+  font-size: 16px;
 `;
 
 const LocationJoined = styled.div`
@@ -203,8 +229,8 @@ const NumFollowing = styled.div`
 `;
 
 const Tabs = styled.div`
-  border: grey solid 1px;
-  border-bottom: 8px solid #4c00ffba;
+  border-bottom: 1px solid grey;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -213,18 +239,35 @@ const Tabs = styled.div`
 const Tweets = styled.div`
   font-size: 18px;
   font-weight: bold;
+  &:hover {
+    color: #4c00ffba;
+    text-decoration: underline;
+  }
 `;
 
 const Media = styled.div`
   font-size: 18px;
   font-weight: bold;
+  &:hover {
+    color: #4c00ffba;
+    text-decoration: underline;
+  }
 `;
 
 const Likes = styled.div`
   font-size: 18px;
   font-weight: bold;
+  &:hover {
+    color: #4c00ffba;
+    text-decoration: underline;
+  }
 `;
 
-const TweetsTabBody = styled.div`
-  width: 75%;
+const Location = styled.span`
+  padding: 0px 5px;
 `;
+const DateJoined = styled.span`
+  padding: 0px 5px;
+`;
+
+const TweetsTabBody = styled.div``;

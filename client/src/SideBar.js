@@ -93,7 +93,7 @@ const LinkStyles = styled.div`
   display: flex;
   flex-direction: row;
   line-height: 2;
-  width: 100%;
+  width: 80%;
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 10px;

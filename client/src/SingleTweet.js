@@ -46,7 +46,10 @@ const SingleTweet = () => {
             </MediaDiv>
           ) : null}
           <TimeAndPlace>
-            - {formattedDate} - {renderedTweet.author.location}
+            {formattedDate}{" "}
+            {renderedTweet.author.location
+              ? "- " + renderedTweet.author.location
+              : null}
           </TimeAndPlace>
         </TweetBody>
         <ActionBar />
