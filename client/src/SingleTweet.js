@@ -9,6 +9,7 @@ const SingleTweet = () => {
   const {
     selectedTweetId,
     relevantHomeFeed: { tweetsById },
+    getUserProfile,
   } = useContext(CurrentUserContext);
   const renderedTweet = tweetsById[selectedTweetId];
   const date = renderedTweet.timestamp;
@@ -18,17 +19,22 @@ const SingleTweet = () => {
     <SingleTweetMainDiv>
       <CurrentPage>Meow</CurrentPage>
       <TweetDiv>
-        <Header>
-          <Avatar src={renderedTweet.author.avatarSrc}></Avatar>
-          <TweetAuthor>
-            <AuthorName aria-label="Tweet author's name">
-              {renderedTweet.author.displayName}
-            </AuthorName>
-            <AuthorHandle aria-label="Tweet author's handle">
-              {" "}
-              @{renderedTweet.author.handle}
-            </AuthorHandle>
-          </TweetAuthor>
+        <Header aria-label="Tweet header. Link to tweet author's profile page">
+          <StyledLink
+            onClick={() => getUserProfile(renderedTweet.author.handle)}
+            to={`/profile/${renderedTweet.author.handle}`}
+          >
+            <Avatar src={renderedTweet.author.avatarSrc}></Avatar>
+            <TweetAuthor>
+              <AuthorName aria-label="Tweet author's name">
+                {renderedTweet.author.displayName}
+              </AuthorName>
+              <AuthorHandle aria-label="Tweet author's handle">
+                {" "}
+                @{renderedTweet.author.handle}
+              </AuthorHandle>
+            </TweetAuthor>
+          </StyledLink>
         </Header>
 
         <TweetBody>
@@ -142,6 +148,11 @@ const TweetMedia = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 5px;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  display: flex;
 `;
 
 export default SingleTweet;
